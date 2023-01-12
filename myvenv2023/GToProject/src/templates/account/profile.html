@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block title%}
+Hambaricho > Profile
+{% endblock%}
+{% load static %}
+
+{% block content %}
+
+<style type="text/css">
+	.image-container{
+		max-width: 250px;
+		height: auto;
+	}
+	.field-heading{
+		color: var(--secondary-text-color);
+	}
+	.icon-container:hover {
+		opacity: 0.3;
+		cursor: pointer;
+	}
+	.friends-icon{
+		color: #4287f5;
+		font-size: 40px;
+	}
+	.person-add-icon{
+		color: #4287f5;
+		font-size: 40px;
+	}
+	.friend-text{
+		font-weight: 500;
+		color: black;
+	}
+	.friends-btn{
+		background-color: #cccccc;
+		border-color: #cccccc;
+		color: #000;
+		font-weight: 500;
+	}
+	.friends-btn:hover {
+		background-color: #bfbfbf;
+		border-color: #bfbfbf;
+	}
+	.dropdown-toggle::after { 
+		content: none; 
+	}
+	.card{
+		border-radius: 12px;
+	}
+	.material-icons{
+		font-size: 30px;
+	}
+	.material-icons:hover{
+		cursor: pointer;
+	}
+	.confirm-friend-request{
+		color: green;
+	}
+	.confirm-friend-request:hover {
+		opacity: 0.3;
+	}
+	.decline-friend-request:hover {
+		opacity: 0.3;
+	}
+	.decline-friend-request{
+		color: red;
+	}
+	.message-btn-text{
+		font-weight: 500;
+	}
+</style>
+
+<section id="universalbackground" class="universalbackground" >
+	
+
+<div class="container-fluid">
+	<div class="d-flex flex-row justify-content-center flex-wrap align-items-start">
+
+		<div class="card profile-card m-2">
+		  <div class="card-body">
+		  	<div class="d-flex flex-column justify-content-center p-4">
+              
+		  		<div class="image-container mx-auto mb-4">
+					{% if account%}
+		  			<img class="d-block border border-dark rounded-circle img-fluid mx-auto profile-image" alt="Profile" id="id_profile_image" src="{{accounts.profile_img.url}}" >
+					{% else%}
+					<img class="d-block border border-dark rounded-circle img-fluid mx-auto profile-image" alt="profile" id="id_profile_image" src="{{account.profile_img.url}}">
+				 {% endif %}
+		  		</div>
+				
+				  
+				 
+                  <p class="mt-4 mb-1 field-heading">Email</p>
+		  		<h5>{{account.email}}</h5>
+				 
+                  <p class="mt-4 mb-1 field-heading">First Name</p>
+		  		<h5>{{ account.first_name }}</h5>
+                  <p class="mt-4 mb-1 field-heading">Last Name</p>
+		  		<h5>{{account.last_name}}</h5>
+                
+                
+				  <p class="mt-4 mb-1 field-heading">Phone</p>
+				  <h5>{{ account.phone_number }}</h5>
+               
+
+		  		<!-- If Auth user is viewing their own profile -->
+		  		
+		  		<a  class="mt-4 btn btn-primary" href="{% url 'account:edit'  %}">Update</a>
+				<div class="d-flex flex-column mt-4">
+					<a class="m-auto" href="{% url 'password_change' %}">Change password</a>
+				</div>
+		  		
+		  	</div>
+		  </div>
+		</div>
+
+		
+
+			
+
+		
+	</div>
+</div>
+
+</section>
+
+
+
+
+
+
+
+
+
+{% endblock content %}
+

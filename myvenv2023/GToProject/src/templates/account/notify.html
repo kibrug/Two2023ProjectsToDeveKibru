@@ -1,0 +1,180 @@
+{%extends 'base.html'%}
+{% load static%}
+{% block title%}
+Hambaricho > Notifications
+{% endblock%}
+
+{% block content %}
+
+<style type="text/css">
+	.image-container{
+		max-width: 250px;
+		height: auto;
+	}
+	.field-heading{
+		color: var(--secondary-text-color);
+	}
+	.icon-container:hover {
+		opacity: 0.3;
+		cursor: pointer;
+	}
+	.friends-icon{
+		color: #4287f5;
+		font-size: 40px;
+	}
+	.person-add-icon{
+		color: #4287f5;
+		font-size: 40px;
+	}
+	.friend-text{
+		font-weight: 500;
+		color: black;
+	}
+	.friends-btn{
+		background-color: #cccccc;
+		border-color: #cccccc;
+		color: #000;
+		font-weight: 500;
+	}
+	.friends-btn:hover {
+		background-color: #bfbfbf;
+		border-color: #bfbfbf;
+	}
+	.dropdown-toggle::after { 
+		content: none; 
+	}
+	.card{
+		border-radius: 12px;
+	}
+	.material-icons{
+		font-size: 30px;
+	}
+	.material-icons:hover{
+		cursor: pointer;
+	}
+	.confirm-friend-request{
+		color: green;
+	}
+	.confirm-friend-request:hover {
+		opacity: 0.3;
+	}
+	.decline-friend-request:hover {
+		opacity: 0.3;
+	}
+	.decline-friend-request{
+		color: red;
+	}
+	.message-btn-text{
+		font-weight: 500;
+	}
+</style>
+
+<section id="universalbackground" class="universalbackground">
+
+<div class="container-fluid">
+	<div class="d-flex flex-row justify-content-center flex-wrap align-items-start">
+
+		<div class="card profile-card m-2">
+		  <div class="card-body">
+		  	<div class="d-flex flex-column justify-content-center p-4">
+              
+		  		
+				<div class="card bg-primary text-center" >
+				  <p class="mt-4 mb-1 field-heading h4">Following  Visitors</p>
+				
+				
+				   
+				</div>
+
+				{% for workers in worker %}
+               <div class="card shadow-lg p-3 mt-3 mb-5 bg-body rounded">
+				<b>  <p class="mt-4 mb-1 field-heading">Name:{{workers.name}}</p></b>
+                  <p class="mt-4 mb-1 field-heading">Email:{{workers.email}}</p>
+                  <p class="mt-4 mb-1 field-heading">Phone:{{workers.phone}}</p>
+                  <p class="mt-4 mb-1 field-heading btn btn-info">Date:{{workers.date}}</p>
+				  
+                </div>
+		  		{% endfor%}
+
+               
+
+		  		<!-- If Auth user is viewing their own profile -->
+		  		
+		  		
+		  		
+		  	</div>
+		  </div>
+		</div>
+
+		
+
+			
+
+		
+	</div>
+</div>
+
+</section>
+
+{% include 'footer.html' %}
+<script type="text/javascript">
+
+	
+
+	function onFriendRequestSent(){
+		location.reload();
+	}
+
+	function onFriendRequestCancelled(){
+		location.reload();
+	}
+
+	function onFriendRemoved(){
+		location.reload();
+	}
+
+	function onFriendRequestAccepted(){
+		location.reload();
+	}
+
+	function onFriendRequestDeclined(){
+		location.reload();
+	}
+
+
+	var sendFriendRequestBtn = document.getElementById("id_send_friend_request_btn")
+	if (sendFriendRequestBtn != null){
+		sendFriendRequestBtn.addEventListener("click", function(){
+			sendFriendRequest("{{id}}", onFriendRequestSent)
+		})
+	}
+
+	var cancelFriendRequestBtn = document.getElementById("id_cancel_friend_request_btn")
+	if(cancelFriendRequestBtn != null){
+		cancelFriendRequestBtn.addEventListener("click", function(){
+			cancelFriendRequest("{{id}}", onFriendRequestCancelled)
+		})
+	}
+
+	var removeFriendBtn = document.getElementById("id_unfriend_btn")
+	if (removeFriendBtn != null){
+		removeFriendBtn.addEventListener("click", function(){
+			removeFriend("{{id}}", onFriendRemoved)
+		})
+	}
+
+	function triggerAcceptFriendRequest(friend_request_id){
+		acceptFriendRequest(friend_request_id, onFriendRequestAccepted)
+	}
+
+	function triggerDeclineFriendRequest(friend_request_id){
+		declineFriendRequest(friend_request_id, onFriendRequestDeclined)
+	}
+	
+</script>
+
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %} 
+{% load static%}
+{% block content %} 
+<section id="universalbackground" class="universalbackground">
+
+<!-- body -->
+<div class="container-fluid mt-3">
+    <div class="row m-1">
+
+
+</div>   
+</div>   
+
+<!-- body -->
+<div class="container-fluid mt-3">
+    <div class="row m-1">
+
+
+        <!-- filter -->
+
+        <div class=" col-lg-12 mx-auto">
+            <!-- left side one start-->
+            <div class="list-group card-img-top" style="position: relative; height: 350px">
+
+                <p>All Products</p> 
+                
+                {% if data_list%}
+
+                {% for list in data_list%}
+                <p>{{list.key}}</P>
+                <p>{{list.doc_count}}</p>
+                
+                {% endfor%}
+                {% else%}
+                No Results 
+                {% endif%}
+            </div>
+             <!-- left side one end-->
+
+            
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt-3 footer" >
+<div class="m-0 footerbody">
+<p> Footer </p>
+  
+</div>
+</div>
+<!--Table data end-->
+
+
+</section>
+
+
+{% endblock %}

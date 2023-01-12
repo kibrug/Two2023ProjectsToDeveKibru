@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta rel="search" type="application/opensearchdescription+xml" href="/open_search.xml" title="Hambaricho.org">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="i18nDefaultLocale" content="en_US">
+    <meta name="i18nLocale" content="en_US">
+    <meta name="application-name" content="Hambaricho Toursim">
+    <meta name="application-url" content="https://hambaricho.org">
+    <meta name="google" content="notranslate">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <meta http-equiv="refresh" content="36000">
+    <title>Trand Economic Project</title>
+    
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/hambimg/ham1.jpg'%}" rel="icon">
+    <link href="{% static 'assets/img/hambimg/ham1.jpg'%}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <!--<link href="assets/vendor/fontawesome-free/css/all.min.css'%}" rel="stylesheet">-->
+    <link href="{% static 'assets/vendor/animate.css/animate.min.css'%}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/aos/aos.css'%}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css'%}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css'%}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css'%}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css'%}" rel="stylesheet">
+    <!--  jquery-->
+    <script src="{% static 'assets/js/jquery-3.6.0.min.js'%}"></script>
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css'%}" rel="stylesheet">
+
+    <!-- =======================================================
+  * Template Name: Hambrcho - v1.0.0
+  
+  * Author: kibru.com
+  * License: https://Hambricho.com/license/
+  ======================================================== -->
+  
+</head>
+
+<body>
+
+    <!-- ======= Top Bar ======= -->
+    <div id="topbar" class="d-flex align-items-center fixed-top">
+        <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
+            <div class="align-items-center d-none d-md-flex">
+                <i class="bi bi-clock"></i> Monday - Sunday 
+            </div>
+
+          
+
+            
+           
+            <div class="d-flex align-items-center">
+                <i class="bi bi-phone"></i>   
+                {% for footers in footer%}
+                <strong>Call Us</strong> {{footers.call_us}}   <br>
+                  {% endfor%}
+                
+                
+               
+            </div>
+        </div>
+    </div>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        
+        <div class="container d-flex align-items-center">
+             
+
+            <a href="{% url 'account:home'%}" class="logo me-auto">
+                <!--Logo-->
+                <img src="{% static 'assets/img/Logo/logo.jpg' %}" alt="" class="img-fluid" >
+                 <!-- Uncomment below if you prefer to use an image logo -->
+                <!--<p> H <sup>777</sup>S<sup>c</sup></p>-->
+                
+            </a>
+           
+            
+
+                               
+                   <!-- message-->
+            
+            <div class="align-items-center ">
+                                   
+                {% if messages %}
+            <ul class="messages text-danger" >
+                {% for message in messages %}
+                <p
+                {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                {% endfor %}
+            </ul>
+            {% endif %}
+    
+        
+    
+    
+        </div>
+        <!--End message-->
+            <nav id="navbar" class="navbar order-last order-lg-0">
+            
+          
+                <ul>
+                  <li class="nav-item active">
+                    <a class="nav-link m-4" href="{% url 'account:home'%}">Home </a>
+                </li>
+                    
+                    
+                    {% if user.is_authenticated %}
+                    <li class="nav-item active ">
+                      <a class="nav-link" href="{% url 'account:logout'%}">Logout</a>
+                  </li>
+                    {% if  user.is_superuser%}
+                    <li><a class="nav-link scrollto" href="{% url 'admin:index'%}">Dashboard</a></li>
+                    {%endif%}
+                    
+                    
+                    {% else%}
+                      <!--Search start-->
+                 <div class="search_area ">
+                  <ul class="navbar-nav mx-auto">
+                      <li class="nav-item"><i class="search_btn flaticon-magnifier"></i>
+                          <div id="search">
+                             <!-- <button type="button" class="close">×</button>-->
+                             <form action="{% url 'mainapp:search' %}" method="get">
+                              <input name="q" type="text" placeholder="Search here...." required/>
+                            </form>
+                          
+                              
+                          </div>
+                      </li>
+                  </ul>
+              </div>
+              <!--Search end-->
+             
+
+              <li class="nav-item active">
+                  <a class="nav-link" href="{ url 'account:signupoption' %}">Signup</a>
+              </li>
+              <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'account:login' %}">Login</a>
+              </li>
+              <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'mainapp:graph' %}">Graph</a>
+              </li>
+                    
+                    {% endif%}
+                    
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+                
+                
+            </nav>
+            <!-- .navbar -->
+
+
+        </div>
+    </header>
+    <!-- End Header -->
+
+   
+
+    <main id="main">
+
+       <!-- ======= Hero Section ======= -->
+       <section id="about" class="about p-0 mt-5">
+        <div class="container mt-3" data-aos="fade-up">
+
+        </div>
+        </section>
+
+    
+
+      
+        <!-- ======= attractions Section ======= -->
+        <section id="special_place" class="special_place section-bg mt-5 p-0">
+            <div class="container mb-3 mt-5" data-aos="fade-up">
+           <!--home data area start-->
+<div class="container-fluid mt-3">
+    <div class="row m-0">
+
+
+        <!-- filter -->
+
+        <div class=" col-lg-8 mx-auto card">
+            <!-- left side one start-->
+           
+
+                
+           
+          
+         
+             <!-- left side one end-->
+            
+            
+
+              <!-- left side two start-->
+            <div class="list-group">
+
+                <p>All Products</p>
+                  <!--Dropdown start-->
+            <div class="container">
+              <div class="row">
+                <div class="col-6">
+                <div class="dropdown">
+                  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    Coutry
+                  </a>
+                
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="#">Ethiopia</a></li>
+                    <li><a class="dropdown-item" href="#">SA</a></li>
+                    <li><a class="dropdown-item" href="#">Jupana</a></li>
+                  </ul>
+                </div>
+               </div>
+
+               <div class="col-6">
+                <div class="dropdown">
+                  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    product type
+                  </a>
+                
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="#">Ethiopia</a></li>
+                    <li><a class="dropdown-item" href="#">SA</a></li>
+                    <li><a class="dropdown-item" href="#">Jupana</a></li>
+                  </ul>
+                </div>
+               </div>
+              </div>
+            </div>
+                <!--Dropdown end-->
+                
+                
+                {%if graphs%}
+                <div class="list-group">
+                  <h1> This is Garph data</h1>
+    
+           
+                    
+                  
+                    <img class="card-img-top" src="data:image/png;base64, {{graphs|safe}}">
+                    
+                   
+                  </div>
+                  {%endif%}
+               
+            </div>
+             <!-- left side two end-->
+        </div>
+
+        <!-- all products -->
+        <div  class="col-lg-4 mx-auto card">
+            <div class="row mx-auto">
+                
+
+               <!--start page2-->
+           
+               
+                 
+               <div class="bg-image h-100" >
+                <div class="mask d-flex align-items-center h-100">
+                  <div class="container col-lg-12">
+                    <div class="row justify-content-center">
+                      <div class="col-12">
+                        <div class="card shadow-2-strong">
+                          <div class="card-body p-0">
+                            <div class="table-responsive" >
+                              <table class="table table-white mb-0">
+                                <thead style="background-color: #fff;">
+                                  <tr class="text-uppercase text-success">
+                                    <th scope="col">Class name</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Hours</th>
+                                   
+                                    
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>Like a butterflies</td>
+                                    <td>Boxing</td>
+                                    <td>9:00 AM - 11:00 AM</td>
+                                   
+                                  </tr>
+                                  <tr>
+                                    <td>Mind &amp; Body</td>
+                                    <td>Yoga</td>
+                                    <td>8:00 AM - 9:00 AM</td>
+                                   
+                                  </tr>
+                                  <tr>
+                                    <td>Crit Cardio</td>
+                                    <td>Gym</td>
+                                    <td>9:00 AM - 10:00 AM</td>
+                                   
+                                  </tr>
+                                  <tr>
+                                    <td>Wheel Pose Full Posture</td>
+                                    <td>Yoga</td>
+                                    <td>7:00 AM - 8:30 AM</td>
+                                   
+                                  </tr>
+                                  <tr>
+                                    <td>Playful Dancer's Flow</td>
+                                    <td>Yoga</td>
+                                    <td>8:00 AM - 9:00 AM</td>
+                                   
+                                  </tr>
+                                  <tr>
+                                    <td>Zumba Dance</td>
+                                    <td>Dance</td>
+                                    <td>5:00 PM - 7:00 PM</td>
+                                   
+                                  </tr>
+                                  <tr>
+                                    <td>Cardio Blast</td>
+                                    <td>Gym</td>
+                                    <td>5:00 PM - 7:00 PM</td>
+                                   
+                                  </tr>
+                                  <tr>
+                                    <td>Pilates Reformer</td>
+                                    <td>Gym</td>
+                                    <td>8:00 AM - 9:00 AM</td>
+                                   
+                                  </tr>
+                                  <tr>
+                                    <td>Supple Spine and Shoulders</td>
+                                    <td>Yoga</td>
+                                    <td>6:30 AM - 8:00 AM</td>
+                                   
+                                  </tr>
+                                  <tr>
+                                    <td>Yoga for Divas</td>
+                                    <td>Yoga</td>
+                                    <td>9:00 AM - 11:00 AM</td>
+                                   
+                                  </tr>
+                                  <tr>
+                                    <td>Virtual Cycle</td>
+                                    <td>Gym</td>
+                                    <td>8:00 AM - 9:00 AM</td>
+                                  
+                                  </tr>
+                                  <tr>
+                                    <td>Like a butterfly</td>
+                                    <td>Boxing</td>
+                                    <td>9:00 AM - 11:00 AM</td>
+                                   
+                                  </tr>
+                                  <tr>
+                                    <td>Mind &amp; Body</td>
+                                    <td>Yoga</td>
+                                    <td>8:00 AM - 9:00 AM</td>
+                                  
+                                  </tr>
+                                  <tr>
+                                    <td>Crit Cardio</td>
+                                    <td>Gym</td>
+                                    <td>9:00 AM - 10:00 AM</td>
+                                    
+                                  </tr>
+                                  <tr>
+                                    <td>Wheel Pose Full Posture</td>
+                                    <td>Yoga</td>
+                                    <td>7:00 AM - 8:30 AM</td>
+                                  
+                                  </tr>
+                                  <tr>
+                                    <td>Playful Dancer's Flow</td>
+                                    <td>Yoga</td>
+                                    <td>8:00 AM - 9:00 AM</td>
+                                   
+                                  </tr>
+                                  <tr>
+                                    <td>Zumba Dance</td>
+                                    <td>Dance</td>
+                                    <td>5:00 PM - 7:00 PM</td>
+                                   
+                                  </tr>
+                                  <tr>
+                                    <td>Cardio Blast</td>
+                                    <td>Gym</td>
+                                    <td>5:00 PM - 7:00 PM</td>
+                                   
+                                  </tr>
+                                  <tr>
+                                    <td>Pilates Reformer</td>
+                                    <td>Gym</td>
+                                    <td>8:00 AM - 9:00 AM</td>
+                                  
+                                  </tr>
+                                  <tr>
+                                    <td>Supple Spine and Shoulders</td>
+                                    <td>Yoga</td>
+                                    <td>6:30 AM - 8:00 AM</td>
+                                   
+                                  </tr>
+                                  <tr>
+                                    <td>Yoga for Divas</td>
+                                    <td>Yoga</td>
+                                    <td>9:00 AM - 11:00 AM</td>
+                                   
+                                  </tr>
+                                  <tr>
+                                    <td>Virtual Cycle</td>
+                                    <td>Gym</td>
+                                    <td>8:00 AM - 9:00 AM</td>
+                                   
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             
+            
+            
+           <!--end page2-->
+
+            <!--start page3-->
+            <div class="card mx-auto mb-3" id={{product.id}} style="width: 18rem;">
+                <div class="list-group">
+
+                    <p>Our Products</p>
+                   
+                    <img class="card-img-top" src="{% static 'images/about.jpg' %}" alt="Card image cap">
+                </div>
+
+                <div class="card-footer p-0 no-gutters">
+
+                    
+                    <div class="row no-gutters">
+                       
+                        <div class="text-center col btn btn-success">Donote</div>
+                        
+                    </div>
+                   
+
+                </div>
+
+            </div>
+           <!--end page3-->
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--home data area end-->
+               
+
+               
+
+            </div>
+        </section>
+        <!-- End attractions Section -->
+
+        <!-- ======= Gallery Section ======= -->
+        <section id="gallery" class="gallery">
+            <div class="container" data-aos="fade-up">
+
+               <!-- Table data start-->
+
+<div class="container-fluid mt-3">
+    <div class="m-0 ">
+
+  <div class="bg-image h-100" style="background-color: #f5f7fa;">
+    <div class="mask d-flex align-items-center h-100">
+      <div class="container col-lg-12">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div class="card shadow-2-strong">
+              <div class="card-body p-0">
+                <div class="table-responsive" >
+                  <table class="table table-dark mb-0">
+                    <thead style="background-color: #393939;">
+                      <tr class="text-uppercase text-success">
+                        <th scope="col">Class name</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Hours</th>
+                        <th scope="col">Trainer</th>
+                        <th scope="col">Spots</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Like a butterflies</td>
+                        <td>Boxing</td>
+                        <td>9:00 AM - 11:00 AM</td>
+                        <td>Aaron Chapman</td>
+                        <td>10</td>
+                      </tr>
+                      <tr>
+                        <td>Mind &amp; Body</td>
+                        <td>Yoga</td>
+                        <td>8:00 AM - 9:00 AM</td>
+                        <td>Adam Stewart</td>
+                        <td>15</td>
+                      </tr>
+                      <tr>
+                        <td>Crit Cardio</td>
+                        <td>Gym</td>
+                        <td>9:00 AM - 10:00 AM</td>
+                        <td>Aaron Chapman</td>
+                        <td>10</td>
+                      </tr>
+                      <tr>
+                        <td>Wheel Pose Full Posture</td>
+                        <td>Yoga</td>
+                        <td>7:00 AM - 8:30 AM</td>
+                        <td>Donna Wilson</td>
+                        <td>15</td>
+                      </tr>
+                      <tr>
+                        <td>Playful Dancer's Flow</td>
+                        <td>Yoga</td>
+                        <td>8:00 AM - 9:00 AM</td>
+                        <td>Donna Wilson</td>
+                        <td>10</td>
+                      </tr>
+                      <tr>
+                        <td>Zumba Dance</td>
+                        <td>Dance</td>
+                        <td>5:00 PM - 7:00 PM</td>
+                        <td>Donna Wilson</td>
+                        <td>20</td>
+                      </tr>
+                      <tr>
+                        <td>Cardio Blast</td>
+                        <td>Gym</td>
+                        <td>5:00 PM - 7:00 PM</td>
+                        <td>Randy Porter</td>
+                        <td>10</td>
+                      </tr>
+                      <tr>
+                        <td>Pilates Reformer</td>
+                        <td>Gym</td>
+                        <td>8:00 AM - 9:00 AM</td>
+                        <td>Randy Porter</td>
+                        <td>10</td>
+                      </tr>
+                      <tr>
+                        <td>Supple Spine and Shoulders</td>
+                        <td>Yoga</td>
+                        <td>6:30 AM - 8:00 AM</td>
+                        <td>Randy Porter</td>
+                        <td>15</td>
+                      </tr>
+                      <tr>
+                        <td>Yoga for Divas</td>
+                        <td>Yoga</td>
+                        <td>9:00 AM - 11:00 AM</td>
+                        <td>Donna Wilson</td>
+                        <td>20</td>
+                      </tr>
+                      <tr>
+                        <td>Virtual Cycle</td>
+                        <td>Gym</td>
+                        <td>8:00 AM - 9:00 AM</td>
+                        <td>Randy Porter</td>
+                        <td>20</td>
+                      </tr>
+                      <tr>
+                        <td>Like a butterfly</td>
+                        <td>Boxing</td>
+                        <td>9:00 AM - 11:00 AM</td>
+                        <td>Aaron Chapman</td>
+                        <td>10</td>
+                      </tr>
+                      <tr>
+                        <td>Mind &amp; Body</td>
+                        <td>Yoga</td>
+                        <td>8:00 AM - 9:00 AM</td>
+                        <td>Adam Stewart</td>
+                        <td>15</td>
+                      </tr>
+                      <tr>
+                        <td>Crit Cardio</td>
+                        <td>Gym</td>
+                        <td>9:00 AM - 10:00 AM</td>
+                        <td>Aaron Chapman</td>
+                        <td>10</td>
+                      </tr>
+                      <tr>
+                        <td>Wheel Pose Full Posture</td>
+                        <td>Yoga</td>
+                        <td>7:00 AM - 8:30 AM</td>
+                        <td>Donna Wilson</td>
+                        <td>15</td>
+                      </tr>
+                      <tr>
+                        <td>Playful Dancer's Flow</td>
+                        <td>Yoga</td>
+                        <td>8:00 AM - 9:00 AM</td>
+                        <td>Donna Wilson</td>
+                        <td>10</td>
+                      </tr>
+                      <tr>
+                        <td>Zumba Dance</td>
+                        <td>Dance</td>
+                        <td>5:00 PM - 7:00 PM</td>
+                        <td>Donna Wilson</td>
+                        <td>20</td>
+                      </tr>
+                      <tr>
+                        <td>Cardio Blast</td>
+                        <td>Gym</td>
+                        <td>5:00 PM - 7:00 PM</td>
+                        <td>Randy Porter</td>
+                        <td>10</td>
+                      </tr>
+                      <tr>
+                        <td>Pilates Reformer</td>
+                        <td>Gym</td>
+                        <td>8:00 AM - 9:00 AM</td>
+                        <td>Randy Porter</td>
+                        <td>10</td>
+                      </tr>
+                      <tr>
+                        <td>Supple Spine and Shoulders</td>
+                        <td>Yoga</td>
+                        <td>6:30 AM - 8:00 AM</td>
+                        <td>Randy Porter</td>
+                        <td>15</td>
+                      </tr>
+                      <tr>
+                        <td>Yoga for Divas</td>
+                        <td>Yoga</td>
+                        <td>9:00 AM - 11:00 AM</td>
+                        <td>Donna Wilson</td>
+                        <td>20</td>
+                      </tr>
+                      <tr>
+                        <td>Virtual Cycle</td>
+                        <td>Gym</td>
+                        <td>8:00 AM - 9:00 AM</td>
+                        <td>Randy Porter</td>
+                        <td>20</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!--Table data end--> 
+
+
+            </div>
+        </section>
+        <!-- End Gallery Section -->
+
+        
+
+
+        
+
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        
+        <div class="footer-top">
+            <div class="container">
+                        <div class="col-lg-12 col-sm-12 text-center text-danger">
+                        <p  id="subsic"></p>
+                        </div>
+                <div class="row">
+                
+
+                    <div class="col-lg-4 col-md-6">
+                        
+                        <div class="footer-info">
+                           {% for footers in footer %}
+                            <h3> {{footers.our_domian_name}} </h3>
+                            {% endfor%}
+                           
+                               <p>
+                                {% for footers in footer %}
+                                 <br> {{footers.our_address}} <br><br>
+                                 {% endfor%}
+                                 
+                                
+
+                                 {% for footers in footer%}
+                                <strong>Phone:</strong> {{footers.call_us}}   <br>
+                                  {% endfor%}
+                                
+
+                                {% for footers in footer %}
+                                <strong>Email:</strong>{{footers.email_us}}  <br>
+                                {% endfor%}
+                               
+                              </p>
+                                <div class="social-links mt-3">
+                                    <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                                    <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                                    <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                                    <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                                    <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                                </div>
+                        </div>
+                        
+                    </div>
+
+                   
+                        <div class="col-lg-4 col-md-6 footer-links">
+                            <h4>Useful Links</h4>
+                            <ul>
+                                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'account:home'%}">Home</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="{#% url 'mainapp:main'%#}">About us</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="{#% url 'mainapp:news'%#}">News</a></li>
+                               
+                                <li><i class="bx bx-chevron-right"></i> <a href="{#% url 'mainapp:privacy'%#}">Privacy policy</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="{#% url 'mainapp:developer'%#}">About Developers</a></li>
+                            </ul>
+                        </div>
+
+                
+
+                            <div class="col-lg-4 col-md-6 footer-newsletter">
+                               <h4 >Our Newsletter</h4>
+                        
+
+                                <form action="{#% url 'mainapp:main' %#}" method="post" class="shadow p-3 mb-3 bg-body rounded" id="subscribe" >
+                                    {% csrf_token %}
+                                 <div class="text-center"> {{subform}}<div>
+                                    <div class="text-center mt-1">
+                                    <button type="submit" class="login-btn "> Subscribe </button>
+                                    <div>
+                                    
+                                </form>
+
+                           </div>
+
+                </div>
+            </div>
+            
+        </div>
+    
+       
+
+   
+
+
+        
+    </footer>
+
+    <div class="text-light bg-dark col-lg-12 col-sm-12 justify-content-center justify-item-center"  id="copyright">
+           
+        <div class="row bg-dark col-lg-12 col-sm-12">
+                <div class="copyright float-start col-lg-6 col-sm-6 mt-4 mb-4  text-center ">
+                    &copy; Copyright
+                    {% for footers in footer%} 
+                    {{footers.copyright|date:"Y"}} 
+                    {% endfor%}
+                
+                    <strong><span> 
+                        {% for footers in footer %}
+                        {{footers.our_domian_name}} 
+                    {% endfor%}
+                
+                    </span></strong>. All Rights Reserved
+                </div>
+       
+                <div class="credits float-end col-lg-6 col-sm-6 mt-4 mb-4 text-center">
+
+                    Designed and Developed by <a href="https://kibrut.netlify.app/">BrightTeamAfricaTech PLC</a>
+                </div>
+        </div>
+       
+</div>
+    <!-- End Footer -->
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'assets/vendor/purecounter/purecounter.js'%}"></script>
+    <script src="{% static 'assets/vendor/aos/aos.js'%}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+    <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js'%}"></script>
+    <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js'%}"></script>
+    <script src="{% static 'assets/vendor/php-email-form/validate.js'%}"></script>
+    
+   
+    <!-- Template Main JS File -->
+    <script src="{% static 'assets/js/main.js'%}"></script>
+    
+  
+
+</body>
+
+</html>
