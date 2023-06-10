@@ -11,8 +11,8 @@ from mainapp.models import(Frequency,
                            
                             Hits,
                             Info,
-                            DataClass,
-                             HitsMainClass
+                            TRADINGECONOMICSDATA,
+                              Hitsrelationvalue
                            )
 
 
@@ -52,82 +52,104 @@ class FacetsAdmin(admin.ModelAdmin):
           GroupInline,
              
     ]
+    
+    list_display = ['facets_id',
+                    'country',
+                    'unit',
+                    'type',
+                    'group',
+                    'frequency',
+                    'currency',
+                    'category',
+                    
+                    
+                    ]
+    
+    
     filter_horizontal = ()
     
 
 admin.site.register(Facets,FacetsAdmin)
 
-admin.site.register(HitsMainClass)
 
-  
-    
 
-class FacetsInline(admin.StackedInline):
-    model = Facets
-    extra=1
+
 class CountryAdmin(admin.ModelAdmin):
-    inlines = [
-        FacetsInline,    
-    ]
+     
+    list_display = ['country_id',
+                    'key',
+                    'doc_count',
+   
+                    ]
+ 
     filter_horizontal = ()
     
-admin.site.register(Country)
+admin.site.register(Country,CountryAdmin)
 class FrequencyAdmin(admin.ModelAdmin):
-    inlines = [
-        FacetsInline,
-       
-    ]
+    list_display = ['frequency_id',
+                    'key',
+                    'doc_count',
+   
+                    ]
    
     filter_horizontal = ()
     
-admin.site.register(Frequency)
+admin.site.register(Frequency,FrequencyAdmin)
 
 class GroupAdmin(admin.ModelAdmin):
-    inlines = [
-        FacetsInline,
-       
-    ]
+    list_display = ['group_id',
+                    'key',
+                    'doc_count',
+   
+                    ]
+   
    
     filter_horizontal = ()
     
-admin.site.register(Group)
+admin.site.register(Group,GroupAdmin)
 
 class TypeAdmin(admin.ModelAdmin):
-    inlines = [
-        FacetsInline,
-       
-    ]
+    list_display = ['type_id',
+                    'key',
+                    'doc_count',
+   
+                    ]
    
     filter_horizontal = ()
     
-admin.site.register(Type)
+admin.site.register(Type,TypeAdmin)
 class CategoryAdmin(admin.ModelAdmin):
-    inlines = [
-        FacetsInline,
-       
-    ]
+    list_display = ['category_id',
+                    'key',
+                    'doc_count',
+   
+                    ]
    
     filter_horizontal = ()
     
-admin.site.register(Category)
+admin.site.register(Category,CategoryAdmin)
 class CurrencyAdmin(admin.ModelAdmin):
-    inlines = [
-        FacetsInline,
-       
-    ]
+    list_display = ['currency_id',
+                    'key',
+                    'doc_count',
+   
+                    ]
+   
    
     filter_horizontal = ()
     
 admin.site.register(Currency)
 class UnitAdmin(admin.ModelAdmin):
-    inlines = [
-        FacetsInline,
-       
-    ]
+    list_display = ['unit_id',
+                    'key',
+                    'doc_count',
+   
+                    ]
+   
    
     filter_horizontal = ()
     
-admin.site.register(Unit)
+admin.site.register(Unit,UnitAdmin)
 
 
 
@@ -135,51 +157,90 @@ admin.site.register(Unit)
 class HitssAdmin(admin.ModelAdmin):
   
            
-    list_display = ['url','pretty_name',
-                    'unit','frequency',
-                    'group','type','name',
-                    'importance','s',
-                    'esID','iids','currency',
-                    'category','country','relation','value',
+    list_display = ['url',
+                    'pretty_name',
+                    'unit',
+                    'frequency',
+                    'group',
+                    'type',
+                    'name',
+                    'importance',
+                    's',
+                    'esID',
+                    'iids',
+                    'currency',
+                    'category',
+                    'country',
+                    'relation',
+                    'value',
                     
                     
                     ]
+admin.site.register(Hits,HitssAdmin)
+
+class HitsrelationvalueAdmin(admin.ModelAdmin):
+     
+    list_display = ['hits_id',
+                    'value',
+                    'relation',
+                   
+                    ]
+    
+admin.site.register(Hitsrelationvalue,HitsrelationvalueAdmin)
     
     
-class HitsMainClassInline(admin.StackedInline):
-    model = HitsMainClass
+class HitsInline(admin.StackedInline):
+    model = Hits
     extra=1 
     
 class InfoInline(admin.StackedInline):
     model = Info
     extra=1 
     
-class   DataClassAdmin(admin.ModelAdmin):
+class   TRADINGECONOMICSDATAdmin(admin.ModelAdmin):
+    
     
     inlines = [
-        HitsMainClassInline,
+        HitsInline,
         InfoInline,
        
     ]
    
+    list_display = ['info',
+                    'santase',
+                    'hits',
+                   
+                    ]
+   
     filter_horizontal = ()
  
-admin.site.register(DataClass,DataClassAdmin)    
+admin.site.register(TRADINGECONOMICSDATA,TRADINGECONOMICSDATAdmin)    
     
-admin.site.register(Hits)
 
 
 
-class HitsInline(admin.StackedInline):
-    model = Hits
+
+class HitsrelationvalueInline(admin.StackedInline):
+    model = Hitsrelationvalue
+    extra=1
+class FacetsInline(admin.StackedInline):
+    model = Facets
     extra=1
     
 class   InfoAdmin(admin.ModelAdmin):
     
     inlines = [
-        HitsInline,
+        HitsrelationvalueInline,FacetsInline
        
     ]
+   
+    list_display = ['info_id',
+                    
+                    'hits',
+                    'page',
+                    'facets',
+                   
+                    ]
    
     filter_horizontal = ()
  

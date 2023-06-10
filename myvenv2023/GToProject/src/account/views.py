@@ -2,23 +2,24 @@ from django.shortcuts import render , redirect , HttpResponseRedirect
 from django.contrib.auth.hashers import  check_password
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from account.models import User
-
-
-#from store.models.customer import Customer
-from django.contrib.auth.hashers import make_password
-from django.views import View
-from account.models import User,FreeAccountUser,CutomeAccountUser
-from mainapp.models import Facets,Frequency
-
+from django.contrib.auth import login, authenticate, logout
 from django.http import JsonResponse
 import json
 from django.db.models import Q
 
 
-from mainapp.models import Frequency,Category
+
+from django.contrib.auth.hashers import make_password
+from django.views import View
+from account.models import User,FreeAccountUser,CutomeAccountUser
+from mainapp.models import Facets,Frequency,Country
+
+
+
+from account.models import User
+from mainapp.models import Frequency,Category,Facets,Hits
 from mainapp.utils import get_plot 
-from account.forms import (AccountUpdateForm)
+from account.forms import (AccountUpdateForm,AccountAuthenticationForm)
 # Json Formats 
 def json_View(request):
     #data = list(User.objects.values())
@@ -27,49 +28,64 @@ def json_View(request):
     
     return JsonResponse(data ,safe=False)
 def home_View(request):
+    countrys = Country.objects.all()
+    qsch = Facets.objects.all()
+    hitdata = Hits.objects.all()
     qs = Frequency.objects.all()
     qsp = Category.objects.all()
-    x =[x.key for x in qsp]
-    y = [y.doc_count for y in qsp ]
+    x =[x.data for x in qs]
+    y = [y.doc_count for y in qs ]
+    zy = [zy.frequency_id.country for zy in qs ]
     #s =[s.key for s in qsp]
     z = [z.doc_count for z in qs ]
-    graphs = get_plot(x,y,z)
+    graphs = get_plot(x,y,z,zy)
     
-    return render(request,'index.html',{'graphs':graphs})
+             
+    
+    
+    return render(request,'index.html',{'graphs':graphs,'countrys':countrys,'qsch':qsch,'hitdata':hitdata})
 def signupoption_View(request):
     
-    return render(request, 'signupoptions.html')
+    return render(request, 'account/signupoptions.html')
     
+    
+    
+def login_view(request, *args, **kwargs):
+	context = {}
 
-class Login(View):
-    return_url = None
+	user = request.user
+	if user.is_authenticated: 
+		return redirect(settings.LOGIN_REDIRECT_URL)
 
-    def get(self, request):
-        Login.return_url = request.GET.get ('return_url')
-        return render (request, 'login.html')
+	destination = get_redirect_if_exists(request)
+	print("destination: " + str(destination))
 
-    def post(self, request):
-        email = request.POST.get ('email')
-        password = request.POST.get ('password')
-        user = User.get_user_by_email (email)
-        error_message = None
-        if user:
-            flag = check_password (password, user.password)
-            if flag:
-                request.session['user'] = user.id
+	if request.POST:
+		form = AccountAuthenticationForm(request.POST)
+		if form.is_valid():
+			email = request.POST['email']
+			password = request.POST['password']
+			user = authenticate(email=email, password=password)
+			if user:
+				login(request, user)
+				if destination:
+					if 'next' in request.POST:
+						return redirect(request.POST.get('next'))
+					else:
+						return redirect(destination)
+				return redirect(settings.LOGIN_REDIRECT_URL)
+	else:
+		form = AccountAuthenticationForm()
+	context['form']=form
+	return render(request, "account/login.html", context)
 
-                if Login.return_url:
-                    return HttpResponseRedirect (Login.return_url)
-                else:
-                    Login.return_url = None
-                    return redirect (settings.LOGOUT_REDIRECT_URL)
-            else:
-                error_message = 'Invalid !!'
-        else:
-            error_message = 'Invalid !!'
 
-        print (email, password)
-        return render (request, 'login.html', {'error': error_message})
+def get_redirect_if_exists(request):
+	redirect = None
+	if request.GET:
+		if request.GET.get("next"):
+			redirect = str(request.GET.get("next"))
+	return redirect
 
 def logout_View(request):
     request.session.clear()
@@ -110,7 +126,7 @@ class Signup (View):
             print ( first_name, last_name, phone_number, email, password)
             user.password = make_password(user.password)
             user.save()
-            return redirect ('home')
+            return redirect ("account:home")
         else:
             data = {
                 'error': error_message,
@@ -161,7 +177,7 @@ class Signup_Free_Account_User(View):
         print(email)
         # validation
         value = {
-            #'username':username,
+            
             'first_name': first_name,
             'last_name': last_name,
             'phone_number': phone_number,
@@ -183,7 +199,7 @@ class Signup_Free_Account_User(View):
             print ( first_name, last_name, phone_number, email, password)
             user.password = make_password(user.password)
             user.register()
-            return redirect ('home')
+            return redirect ("account:login")
            
            
         else:
@@ -225,7 +241,7 @@ class Signup_Custome_Account_User(View):
 
     def post(self, request):
         postData = request.POST
-        #username = postData.get ('username')
+      
         first_name = postData.get ('firstname')
         last_name = postData.get ('lastname')
         phone_number = postData.get ('phone_number')
@@ -233,7 +249,7 @@ class Signup_Custome_Account_User(View):
         password = postData.get ('password')
         # validation
         value = {
-            #'username':username,
+           
             'first_name': first_name,
             'last_name': last_name,
             'phone_number': phone_number,
@@ -256,7 +272,7 @@ class Signup_Custome_Account_User(View):
             user.password = make_password(user.password)
             user.register ()
             
-            return redirect ('home')
+            return redirect ("account:login")
         else:
             data = {
                 'error': error_message,
@@ -311,10 +327,10 @@ def edit_account_view(request, *args, **kwargs):
  
 	if not request.user.is_authenticated:
 		return redirect("account:login")
-	#user_id = kwargs.get("user_id")
+	
 	else:
 		account = User.objects.get(pk=user_id)
-		#worker  = Worker.objects.get(user_id=user_id)
+		
 		if account.pk != request.user.pk:
 			return HttpResponse("You cannot edit someone elses profile.")
 		context = {}
@@ -329,7 +345,7 @@ def edit_account_view(request, *args, **kwargs):
 						
 						"email": account.email, 
 						"profile_imag":account.profile_imag,
-						"frist_name": account.frist_name,
+						"first_name": account.first_name,
 						"last_name": account.last_name,
 						
 						"phone_number": account.phone_number,

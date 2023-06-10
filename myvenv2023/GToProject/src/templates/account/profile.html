@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title%}
-Hambaricho > Profile
+ Profile
 {% endblock%}
 {% load static %}
 
@@ -80,11 +80,13 @@ Hambaricho > Profile
 		  	<div class="d-flex flex-column justify-content-center p-4">
               
 		  		<div class="image-container mx-auto mb-4">
+					<!--
 					{% if account%}
 		  			<img class="d-block border border-dark rounded-circle img-fluid mx-auto profile-image" alt="Profile" id="id_profile_image" src="{{accounts.profile_img.url}}" >
 					{% else%}
 					<img class="d-block border border-dark rounded-circle img-fluid mx-auto profile-image" alt="profile" id="id_profile_image" src="{{account.profile_img.url}}">
 				 {% endif %}
+				 -->
 		  		</div>
 				
 				  

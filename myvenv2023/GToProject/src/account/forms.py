@@ -1,12 +1,13 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.contrib.auth import login, authenticate, logout
 
-#User = get_user_model()
 from account.models import User
 
 
 class RegisterForm(forms.ModelForm):
+    
     """
     The default 
 
@@ -109,7 +110,7 @@ class AccountUpdateForm(forms.ModelForm):
         email = self.cleaned_data['email'].lower()
         try:
             account = User.objects.exclude(pk=self.instance.pk).get(email=email)
-        except Account.DoesNotExist:
+        except User.DoesNotExist:
             return email
         raise forms.ValidationError('Email "%s" is already in use.' % account)
 
@@ -127,3 +128,19 @@ class AccountUpdateForm(forms.ModelForm):
         if commit:
             account.save()
         return account
+    
+    
+class AccountAuthenticationForm(forms.ModelForm):
+
+	password = forms.CharField(label='Password', widget=forms.PasswordInput)
+	email   = forms.CharField(label='Email', widget=forms.EmailInput)
+	class Meta:
+		model = User
+		fields = ('email', 'password')
+
+	def clean(self):
+		if self.is_valid():
+			email = self.cleaned_data['email']
+			password = self.cleaned_data['password']
+			if not authenticate(email=email, password=password):
+				raise forms.ValidationError("Invalid login")

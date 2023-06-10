@@ -1,6 +1,10 @@
 {% extends 'base.html' %} 
 {% load static%}
 {% block content %} 
+
+
+
+
 <section id="universalbackground" class="universalbackground">
 
 <!-- body -->
@@ -17,24 +21,42 @@
 
 
         <!-- filter -->
-
+        
         <div class=" col-lg-12 mx-auto">
             <!-- left side one start-->
             <div class="list-group card-img-top" style="position: relative; height: 350px">
 
-                <p>All Products</p> 
+            
+            <div class="col-12">
+                <div class="text-center row">
+                <div class="col-12">
+
+                <p>Search Results</p> 
+                </div>
                 
                 {% if data_list%}
-
+               
                 {% for list in data_list%}
-                <p>{{list.key}}</P>
-                <p>{{list.doc_count}}</p>
+                <div class="col-4">
+                <p>{{list.country}}</P>
+                <p>{{list.category}}</p>
+                <p>{{list.currency }}</p>
+                <p>{{list.importance}}</p>
+                <p>{{list.group}}</p>
+                <p>{{list.pretty_name}}</p>
+            </div>
+               
                 
                 {% endfor%}
+           
                 {% else%}
-                No Results 
+                No Results
+                
+                
                 {% endif%}
             </div>
+        </div>
+        </div>
              <!-- left side one end-->
 
             
@@ -46,7 +68,7 @@
 </div>
 <div class="container-fluid mt-3 footer" >
 <div class="m-0 footerbody">
-<p> Footer </p>
+
   
 </div>
 </div>

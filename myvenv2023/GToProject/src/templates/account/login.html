@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block link%}
+<li>
+  <a class="nav-link  text-center scrollto" href="{% url 'account:login'%}"> <button type="button" class="login-btn ">Login</button></a>
+  </li>
+  {% endblock%}
+ 
+{% block content %}
+<section id="universalbackground" class="universalbackground">
+
+
+
+<style type="text/css">
+
+    .card-signin {
+        width: 100%;
+        max-width: 400px;
+        padding: 15px;
+        margin: auto;
+    }
+    label{
+     
+      text-align: center;
+      justify-content: center;
+      justify-items: center;
+      margin-left: 50px;
+      margin-right: 50px;
+    }
+    
+    .form-signin input[type="email"] {
+      margin-bottom: 10px;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+      justify-content:center;
+      
+    }
+    .form-signin input[type="password"] {
+      margin-bottom: -1px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  
+  
+  </style>
+  
+  <div class="container-fluid">
+      <div class="row justify-content-center">
+          <div class="card card-signin">
+            <div class="card-body">
+              <form class="form-signin" method="post">{% csrf_token %}
+                  <div class="d-flex flex-column pb-3">
+                    <!--
+                  <img class="img-fluid mx-auto d-block" src="{% static 'assets/img/hambimg/ham1.jpg' %}" alt="Hambarcho" width="72" height="72">
+                  -->
+                  </div>
+                 
+                  <div class=" mb-3 row ">
+                      <div class="col-sm-12 text-center mt-3">
+                       
+                     
+                         </div>
+                      </div>
+                      <div class="col-sm-12 text-center mt-3">
+                      
+                        
+                        <div class="col-sm-12">
+                          <h6 class="mt-4 field-heading"></h6>
+                          {{form.as_p}}
+                        
+                        </div>
+                      </div>
+                  </div>
+                  {% if request.GET.next %}
+                  <input type="hidden" name="next" value="{{ request.GET.next }}">
+                    {% endif %}
+
+                
+                  {% for field in login_form %}
+                  <p>
+                  {% for error in field.errors %}
+                  <p style="color: red">{{ error }}</p>
+                  {% endfor %}
+                  </p>
+                  {% endfor %}
+                  {% if login_form.non_field_errors %}
+                  <div style="color: red">
+                  <p>{{login_form.non_field_errors}}</p>
+                  </div>
+  
+                  {% endif %}
+                 
+
+                        <div class="text-center mt-2">
+                        <button class="btn btn-lg btn-primary btn-block " type="submit">Log in</button>
+                        </div> 
+                </form>
+  
+                  <div class="d-flex flex-column my-4">
+                      <a class="m-auto" href="{% url 'password_reset' %}">Forgot password?</a>
+                  </div>
+            </div>
+          </div>
+          
+      </div>
+  </div>
+  
+</section >
+
+{% endblock  %}
+

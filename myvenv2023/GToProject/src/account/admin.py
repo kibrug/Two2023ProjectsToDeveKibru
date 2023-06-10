@@ -17,8 +17,7 @@ class UserAdmin(BaseUserAdmin):
     add_form = UserAdminCreationForm
 
     # The fields to be used in displaying the User model.
-    # These override the definitions on the base UserAdmin
-    # that reference specific fields on auth.User.
+   
     list_display = ['email','first_name','last_name','date_joined', 'last_login', 'is_active','free_user','custome_user','staff', 'admin']
     list_filter = [ 'is_active','free_user','custome_user','staff', 'admin']
     fieldsets = (
@@ -26,8 +25,7 @@ class UserAdmin(BaseUserAdmin):
        
         ('Permissions', {'fields': ( 'is_active','free_user','custome_user','staff', 'admin')}),
     )
-    # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
-    # overrides get_fieldsets to use this attribute when creating a user.
+   
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
@@ -72,11 +70,6 @@ class CutomeAccountUserAdmin(admin.ModelAdmin):
 admin.site.register(CutomeAccountUser, CutomeAccountUserAdmin)
 
 class FreeAccountUserAdmin(admin.ModelAdmin):
-  
-
-    # The fields to be used in displaying the User model.
-    # These override the definitions on the base UserAdmin
-    # that reference specific fields on auth.User.
     list_display = ['email','first_name','last_name','free_user',]
     list_filter = [ 'free_user',]
     fieldsets = (
@@ -84,8 +77,7 @@ class FreeAccountUserAdmin(admin.ModelAdmin):
         ('Personal info', {'fields': ()}),
         ('Permissions', {'fields': ( 'free_user',)}),
     )
-    # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
-    # overrides get_fieldsets to use this attribute when creating a user.
+    
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
@@ -100,8 +92,8 @@ class FreeAccountUserAdmin(admin.ModelAdmin):
 admin.site.register(FreeAccountUser, FreeAccountUserAdmin)
 
 
-# Admin Text Change
+# Admin Site Text 
 
-admin.site.site_header = 'Winner Project User'                    # default: "Django Administration"
-admin.site.index_title = 'Winner Project Area'                 # default: "Site administration"
-admin.site.site_title = 'Winner Project adminsitration' # default: "Django site admin"
+admin.site.site_header = 'Winner Project User'                   
+admin.site.index_title = 'Winner Project Area'                
+admin.site.site_title = 'Winner Project adminsitration' 

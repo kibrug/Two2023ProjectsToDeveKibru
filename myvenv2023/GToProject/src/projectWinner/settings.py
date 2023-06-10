@@ -141,6 +141,6 @@ else:
 # defoalt login url
 LOGIN_URL="/account/login"
     
-LOGIN_REDIRECT_URL ="/account/profile"  
+LOGIN_REDIRECT_URL ="/profile"  
 
 LOGOUT_REDIRECT_URL ="/"

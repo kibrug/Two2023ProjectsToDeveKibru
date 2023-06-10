@@ -77,7 +77,6 @@
              
 
             <a href="{% url 'account:home'%}" class="logo me-auto">
-              <p> T-E-C-D-P </p>
                 <!--Logo-->
                 <img src="{% static 'assets/img/Logo/logo.jpg' %}" alt="" class="img-fluid" >
                  <!-- Uncomment below if you prefer to use an image logo -->
@@ -133,7 +132,9 @@
               <li class="nav-item active">
                   <a class="nav-link" href="{% url 'account:login' %}">Login</a>
               </li>
-            
+              <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'mainapp:graph' %}">Graph</a>
+              </li>
                     
                     {% endif%}
                     
@@ -188,7 +189,55 @@
               <!-- left side two start-->
             <div class="list-group">
 
-               
+                <p>Cumpations Type</p>
+                  <!--Dropdown start-->
+            <div class="container">
+              <div class="row">
+                <div class="col-6">
+                <div class="dropdown">
+                  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    Coutry
+                  </a>
+                  
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    {% for c in countrys%}
+                  
+                    <form action="{% url 'mainapp:graphreuest' c.id %}"  method="post" >
+                      {% csrf_token %}  
+                      <li> <a class="dropdown-item" > <button type="submit" class=" mb-2">{{c.country_id.country}} </button></a></li>
+                  </form>
+                    
+                    {% endfor%}
+                  </ul>
+                 
+                </div>
+               </div>
+
+               <div class="col-6">
+                <div class="dropdown">
+                  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    product type
+                  </a>
+                
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    {% for ch  in qsch %}
+                    
+                    <form action="{% url 'mainapp:graphreuest' ch.currency %}"  method="post" >
+                      {% csrf_token %}  
+                      <li> <a class="dropdown-item" > <button type="submit" class=" mb-2">{{ch.currency}} </button></a></li>
+                  </form>
+                  <form action="{% url 'mainapp:graphreuest' ch.unit %}"  method="post" >
+                    {% csrf_token %}  
+                    <li> <a class="dropdown-item" > <button type="submit" class=" mb-2">{{ch.unit}} </button></a></li>
+                </form>
+                  
+                    {% endfor%}
+                  </ul>
+                </div>
+               </div>
+              </div>
+            </div>
+                <!--Dropdown end-->
                 
                 
                 {%if graphs%}
