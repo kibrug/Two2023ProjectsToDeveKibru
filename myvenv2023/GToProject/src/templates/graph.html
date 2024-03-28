@@ -1,0 +1,188 @@
+{% extends 'base.html' %} 
+{% load static%}
+{% block content %} 
+<section id="universalbackground" class="universalbackground">
+
+<!-- body -->
+<div class="container-fluid mt-3">
+    <div class="row m-1">
+
+
+        <!-- filter -->
+
+        <div class=" col-lg-8 mx-auto card">
+            <!-- left side one start-->
+            {%if chart%}
+            <div class="list-group">
+
+       
+                
+              
+                <img class="card-img-top" src="data:image/png;base64, {{chart|safe}}">
+                
+               
+              </div>
+            {% endif%}
+             <!-- left side one end-->
+
+             
+        </div>
+
+        <!-- all products -->
+        <div id='products' class="col-lg-4 mx-auto card">
+            <div class="row mx-auto">
+                
+
+               <!--start page2-->
+               <div class="card mx-auto mb-3" id={{product.id}} style="width: 18rem;">
+                <section class="intro">
+                    <div class="gradient-custom-1 h-100">
+                      <div class="mask d-flex align-items-center h-100">
+                        <div class="container">
+                          <div class="row justify-content-center">
+                            <div class="col-12">
+                              <div class="table-responsive bg-white">
+                                <table class="table mb-0">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">EMPLOYEES</th>
+                                      <th scope="col">POSITION</th>
+                                      <th scope="col">CONTACTS</th>
+                                      <th scope="col">AGE</th>
+                                      
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row" style="color: #666666;">Tiger Nixon</th>
+                                      <td>System Architect</td>
+                                      <td>tnixon12@example.com</td>
+                                      <td>61</td>
+                                     
+                                      
+                                    </tr>
+                                    <tr>
+                                      <th scope="row" style="color: #666666;">Sonya Frost</th>
+                                      <td>Software Engineer</td>
+                                      <td>sfrost34@example.com</td>
+                                      <td>23</td>
+                                      
+                                     
+                                    </tr>
+                                    <tr>
+                                      <th scope="row" style="color: #666666;">Jena Gaines</th>
+                                      <td>Office Manager</td>
+                                      <td>jgaines75@example.com</td>
+                                      <td>30</td>
+                                      
+                                     
+                                    </tr>
+                                    <tr>
+                                      <th scope="row" style="color: #666666;">Quinn Flynn</th>
+                                      <td>Support Lead</td>
+                                      <td>qflyn09@example.com</td>
+                                      <td>22</td>
+                                      
+                                     
+                                    </tr>
+                                    <tr>
+                                      <th scope="row" style="color: #666666;">Charde Marshall</th>
+                                      <td>Regional Director</td>
+                                      <td>cmarshall28@example.com</td>
+                                      <td>36</td>
+                                     
+                                     
+                                    </tr>
+                                    <tr>
+                                      <th scope="row" style="color: #666666;">Haley Kennedy</th>
+                                      <td>Senior Marketing Designer</td>
+                                      <td>hkennedy63@example.com</td>
+                                      <td>43</td>
+                                      
+                                    
+                                    </tr>
+                                    <tr>
+                                      <th scope="row" style="color: #666666;">Tatyana Fitzpatrick</th>
+                                      <td>Regional Director</td>
+                                      <td>tfitzpatrick00@example.com</td>
+                                      <td>19</td>
+                                      
+                                     
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                <div class="card-body">
+                    <p class="card-title"></p>
+                    <p class="card-text"><b></b></p>
+                   
+                </div>
+
+                <div class="card-footer p-0 no-gutters">
+
+                    
+                    <div class="row no-gutters">
+                       
+                        <div class="text-center col btn btn-success">More</div>
+                        
+                    </div>
+                   
+
+                </div>
+
+            </div>
+           <!--end page2-->
+
+            <!--start page3-->
+            <div class="card mx-auto mb-3" id={{product.id}} style="width: 18rem;">
+                <div class="list-group">
+
+                    <p>Our Products</p>
+                   
+                    <img class="card-img-top" src="{% static 'images/about.jpg' %}" alt="Card image cap">
+                </div>
+
+                <div class="card-footer p-0 no-gutters">
+
+                    
+                    <div class="row no-gutters">
+                       
+                        <div class="text-center col btn btn-success">Donote</div>
+                        
+                    </div>
+                   
+
+                </div>
+
+            </div>
+           <!--end page3-->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--end body -->
+
+<div class="container-fluid mt-3 footer" >
+<div class="m-0 footerbody">
+<p> Footer </p>
+  
+</div>
+</div>
+<!--Table data end-->
+
+
+
+</section>
+
+{% endblock %}
+
+

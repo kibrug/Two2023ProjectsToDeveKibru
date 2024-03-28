@@ -1,0 +1,11 @@
+ordener user
+custome user
+admin
+staff
+active
+
+
+Account Type
+
+-Free account 
+-Custome Account

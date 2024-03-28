@@ -1,0 +1,93 @@
+
+
+1.{"info":{
+
+   "hits":{"value":10000,"relation":"gte"},
+   "page":0,
+   "facets":{"country":[],
+                 "unit":[
+                                {"key":"Percent","doc_count":647},
+                                  {"key":"Persons","doc_count":335},
+                                    {"key":"LCU","doc_count":63},
+                                 {"key":"Year","doc_count":33},
+                                  {"key":"Day","doc_count":10},          
+                               {"key":"GPI","doc_count":8},
+                                {"key":"Square","doc_count":7},
+                                   {"key":"Kilometer","doc_count":6},
+                                 {"key":"Ha","doc_count":5},         
+                                  {"key":"Hour","doc_count":5},
+                                 {"key":"100","doc_count":4},
+                                {"key":"Kwh","doc_count":4},
+                              {"key":"People","doc_count":4},          
+                               {"key":"Per","doc_count":4}],
+
+            "currency":[{"key":"USD","doc_count":26145}],
+            "category":[],
+            "type":[{"key":"Comtrade","doc_count":25920},
+                         {"key":"WB","doc_count":1662}],
+            "group":[{"key":"Education","doc_count":335},
+                             {"key":"AND","doc_count":280},
+                             {"key":"Economy","doc_count":242},                              
+                            {"key":"Growth","doc_count":242},
+                            {"key":"Labour","doc_count":217},
+                            {"key":"Health","doc_count":187},                           
+                            {"key":"Government","doc_count":146},
+                           {"key":"Business","doc_count":145},
+                          {"key":"Money","doc_count":125},                        
+                        {"key":"Development","doc_count":52},
+                       {"key":"Aid","doc_count":48},
+                         {"key":"Agriculture","doc_count":36},                        
+                         {"key":"Energy","doc_count":33},
+                        {"key":"Mining","doc_count":33},
+                       {"key":"Infrastructure","doc_count":32},                                                 
+                        {"key":"Climate","doc_count":13},
+                      {"key":"Poverty","doc_count":6},
+                      {"key":"Science","doc_count":5},                                              
+                        {"key":"Technology","doc_count":5},
+                      {"key":"Trade","doc_count":1}],
+         "frequency":
+                        [{"key":"Annual","doc_count":27556},
+                         {"key":"Quarterly","doc_count":26}] }
+
+               },
+
+
+2. "hits":[
+{"country":"Nigeria",
+"category":"Imports",
+"currency":"USD",
+"iids":"te:comtrade:nigeria.imcount.ctglobal",
+"esID":"te:comtrade:nigeria.imcount.ctglobal",
+"s":"nigeria.imcount.ctglobal",
+"importance":50,
+"name":"Nigeria Imports by Country",
+"type":"comtrade",
+"group":null,
+"frequency":"Annual",
+"unit":null,
+"pretty_name":"Nigeria Imports by Country",
+"url":"/nigeria/imports-by-country"},
+
+
+{"country":null,
+"category":"Exports",
+"currency":"USD",
+"iids":"te:comtrade:usanga00002",
+"esID":"te:comtrade:usanga00002",
+"s":"usanga00002:comtrade",
+"importance":41,
+"name":"United States exports to Nigeria",
+"type":"comtrade",
+"group":null,
+"frequency":"Annual",
+"unit":null,
+"pretty_name":"United States exports to Nigeria",
+"url":"/united-states/exports/nigeria"},
+
+
+],
+
+3. "stance":"2"
+
+}
+

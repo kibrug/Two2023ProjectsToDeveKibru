@@ -1,0 +1,61 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content%}
+<section id="universalbackground" class="universalbackground">
+<!-- body -->
+<div class="container-fluid mt-5">
+    <div class="row m-1 mt-5">
+
+
+        <!-- Free Signup -->
+
+        <div class=" col-lg-6 mx-auto mt-5">
+            
+            <div class="list-group  mt-5">
+
+                <h1 class="text-center">Free Signup</h1> 
+                <p class="text-start"> 
+                    Access free datasets from the Worldbank,
+                     the United Nations, the Federal Reserve and much 
+                     more from a single API account.</p>
+                
+               
+            </div>
+            <div class="list-group mt-3">
+                <a class="text-center text-primary" href="/free_account"> Get Started</a>
+            </div>
+            
+          
+
+             
+        </div>
+          <!-- Free Signup  end-->
+
+        <!-- Premium Signup -->
+        <div class=" col-lg-6 mx-auto mt-5">
+            
+            <div class="list-group mt-5">
+                
+                <h1 class="text-center">Premium </h1> 
+                
+                    <p class="text-start">Trading Economics provides its API subscribers 
+                        with a near real-time economic calendar updated 24 
+                        hours a day, historical data time series sourced recently 
+                        and directly from national statistics offices, quotes for 
+                        thousands of financial markets and active support. </p>
+              
+                
+            </div>
+            <div class="list-group mt-3">
+                <a class="text-center text-primary" href="/custome_account"> Register</a>
+            </div>
+             
+
+             
+        </div>
+        <!-- Premium Signup end -->
+
+    </div>
+</div>
+</section>
+{% endblock%}

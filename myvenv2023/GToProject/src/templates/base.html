@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta http-equiv="refresh" content="36000">
+
+    <title>Hambaricho Eco-Toursim Site</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta rel="search" type="application/opensearchdescription+xml" href="/open_search.xml" title="Hambaricho.org">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="i18nDefaultLocale" content="en_US">
+    <meta name="i18nLocale" content="en_US">
+    <meta name="application-name" content="Hambaricho Toursim">
+    <meta name="application-url" content="https://hambaricho.org">
+    <meta name="google" content="notranslate">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/hambimg/ham1.jpg'%}" rel="icon">
+    <link href="{% static 'assets/img/hambimg/ham1.jpg'%}" rel="apple-touch-icon">
+
+      <!-- Croppercss -->
+      <link rel="stylesheet" href="{% static 'assets/cropperjs/dist/cropper.min.css' %}">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+   <!-- <link href="assets/vendor/fontawesome-free/css/all.min.css'%}" rel="stylesheet">-->
+    <link href="{% static 'assets/vendor/animate.css/animate.min.css'%}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/aos/aos.css'%}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css'%}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css'%}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css'%}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css'%}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css'%}" rel="stylesheet">
+
+
+    <!-- =======================================================
+  * Template Name: Hambricho - v1.0.0
+  
+  
+  * Author: kibru.com
+  * License: https://Hambrcho.com/license/
+  ======================================================== -->
+  <!-- Cropperjs css-->
+  <link rel="stylesheet" href="{% static 'cropperjs/dist/cropper.min.css' %}">
+  <!--on loader-->
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+<body>
+
+    <!-- ======= Top Bar ======= -->
+    
+    <div id="topbar" class="d-flex align-items-center fixed-top">
+        <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
+            <div class="align-items-center d-none d-md-flex">
+                <i class="bi bi-clock"></i> Monday - Sunday 
+            </div>
+            <div class="align-items-center d-none d-md-flex">
+                            {% if messages %}
+                <ul class="messages" style="color:red">
+                    {% for message in messages %}
+                    <li
+                    {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="d-flex align-items-center">
+                <i class="bi bi-phone"></i> Call us now +251 5589 554886
+            </div>
+        </div>
+    </div>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+
+            <a href="{% url 'account:home'%}" class="logo me-auto">
+                
+                <img src="{% static 'assets/img/Logo/logo.jpg' %}" alt="" class="img-fluid">
+                
+            </a>
+           
+
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                  
+                  
+                    {% if user.is_authenticated %}
+                   
+                   
+                <li><a class="nav-link scrollto" href="{% url 'account:profile'%}">Profile</a></li>
+                {% if  user.is_superuser%}
+                <li><a class="nav-link scrollto" href="{% url 'admin:index'%}">Dashboard </a></li>
+                {%endif%}
+               
+                
+                   
+                   
+
+              
+               
+                <li><a class="nav-link scrollto" href="{% url 'account:logout'%}"><button type="button" class="login-btn">Logout </button></a></li>
+                    
+                    {% else %} 
+
+                    {% block link%}
+
+                    {% endblock%}
+
+                    
+                    
+                    {% endif%}
+                    
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+            <!-- .navbar -->
+
+
+        </div>
+    </header>
+    <!-- End Header -->
+    <!--Loader-->
+    <div class="container" id="id_loading_spinner" style="display: none">
+        <div class="d-flex flex-row mx-auto flex-grow-1 justify-content-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+  
+
+    <main id="main">
+
+
+        <div class=' container'> 
+            <div class=' row'> 
+                <div class='mt-5'>  
+                    <div class='mt-5'>   </div>     
+                </div> 
+                
+            </div>  
+        </div>
+
+       
+      
+
+
+      {% block  content  %}
+      {% endblock  %}
+
+
+
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+  
+   
+    <div class="text-light bg-dark col-lg-12 col-sm-12 justify-content-center justify-item-center"  id="copyright">
+           
+        <div class="row bg-dark col-lg-12 col-sm-12">
+                <div class="copyright float-start col-lg-6 col-sm-6 mt-4 mb-4  text-center ">
+                    &copy; Copyright
+                    {% for footers in footer%} 
+                    {{footers.copyright|date:"Y"}} 
+                    {% endfor%}
+                
+                    <strong><span> 
+                        {% for footers in footer %}
+                        {{footers.our_domian_name}} 
+                    {% endfor%}
+                
+                    </span></strong>. All Rights Reserved
+                </div>
+       
+                <div class="credits float-end col-lg-6 col-sm-6 mt-4 mb-4 text-center">
+
+                    Designed and Developed by <a href="https://kibrut.netlify.app/">BrightTeamAfricaTech PLC</a>
+                </div>
+        </div>
+       
+</div>
+    
+    <!-- End Footer -->
+    <!--spinner Loader--> 
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!--End spinner Loader--> 
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'assets/vendor/purecounter/purecounter.js'%}"></script>
+    <script src="{% static 'assets/vendor/aos/aos.js'%}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+    <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js'%}"></script>
+    <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js'%}"></script>
+    <script src="{% static 'assets/vendor/php-email-form/validate.js'%}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{% static 'assets/js/main.js'%}"></script>
+  <!-- Cropperjs -->
+ 
+    <script type="module" src="{% static 'cropperjs/dist/cropper.min.js' %}"></script>
+    <script type="module" src="{% static 'cropperjs/dist/cropper.js' %}"></script>
+    <script type="module" src="{% static 'cropperjs/dist/cropper.min.esm.js' %}"></script>
+    <script type="module" src="{% static 'cropperjs/dist/cropper.common.js' %}"></script>
+
+
+
+
+
+</body>
+
+</html>
