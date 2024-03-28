@@ -49,7 +49,11 @@ class UserAdminCreationForm(forms.ModelForm):
 
     class Meta:
         model = User
+<<<<<<< HEAD
         fields = ['email','password',]
+=======
+        fields = ['email']
+>>>>>>> 24e88294bf7c38b2edefd8f78411821a21c29d06
 
     def clean(self):
         '''

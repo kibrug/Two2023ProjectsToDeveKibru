@@ -1,0 +1,3 @@
+Django's built-in User model and authentication support is incredible. It's been a staple of Django for a long time. For me, it's one of the primary reasons I use Django over Flask, FastAPI, AIOHttp, and many other web frameworks.
+
+Every once and a while, you need to change the functionality of the default user model. Let's say you no longer want a username field at all. Or you want the email field to be your default "username" field. For this, we need to customize our default Django User model.
